@@ -1,0 +1,44 @@
+---
+swagger: "2.0"
+info:
+  version: "0.0.0"
+  title: "Train lookup service"
+paths:
+  /{route}/trains/{train_code}:
+    get:
+      description: "Gets a 'Train' object by its code.\n"
+      operationId: "routeTrainsTrain_codeGET"
+      parameters:
+      - name: "route"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "train_code"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/Train"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Default"
+definitions:
+  Train:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+        description: "The code for the train."
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
